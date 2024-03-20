@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Hdmi Resolution
+Comment=Configure screen resolution
+Exec=/usr/local/bin/hdmi_setup.sh
+Icon=rpi
+Terminal=true
+StartupNotify=false
+Categories=GTK;Settings;HardwareSettings;

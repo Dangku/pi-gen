@@ -12,7 +12,7 @@ fi
 if [ -n "${FIRST_USER_PASS}" ]; then
 	echo "${FIRST_USER_NAME}:${FIRST_USER_PASS}" | chpasswd
 fi
-echo "root:root" | chpasswd
+echo "root:bananapi" | chpasswd
 EOF
 
 

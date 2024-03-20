@@ -192,6 +192,10 @@ term() {
 
 trap term EXIT INT TERM
 
+export BOARD=${BOARD}
+export DOWNLOAD_MIRROR=${DOWNLOAD_MIRROR:-ustc}
+export BSP_PATH=${BSP_PATH:-"${BASE_DIR}/bpi-bsp/${BOARD}"}
+
 export PI_GEN=${PI_GEN:-pi-gen}
 export PI_GEN_REPO=${PI_GEN_REPO:-https://github.com/RPi-Distro/pi-gen}
 

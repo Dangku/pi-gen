@@ -1,7 +1,12 @@
 #!/bin/bash -e
 
-install -m 644 files/sources.list "${ROOTFS_DIR}/etc/apt/"
-install -m 644 files/raspi.list "${ROOTFS_DIR}/etc/apt/sources.list.d/"
+if [[ $DOWNLOAD_MIRROR == "ustc" ]]; then
+	install -m 644 files/sources_cn.list "${ROOTFS_DIR}/etc/apt/sources.list"
+	install -m 644 files/raspi_cn.list "${ROOTFS_DIR}/etc/apt/sources.list.d/raspi.list"
+else
+	install -m 644 files/sources.list "${ROOTFS_DIR}/etc/apt/"
+	install -m 644 files/raspi.list "${ROOTFS_DIR}/etc/apt/sources.list.d/"
+fi
 sed -i "s/RELEASE/${RELEASE}/g" "${ROOTFS_DIR}/etc/apt/sources.list"
 sed -i "s/RELEASE/${RELEASE}/g" "${ROOTFS_DIR}/etc/apt/sources.list.d/raspi.list"
 
