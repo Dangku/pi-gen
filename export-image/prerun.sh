@@ -19,7 +19,7 @@ if [ "${NO_PRERUN_QCOW2}" = "0" ]; then
 	# some overhead (since actual space usage is usually rounded up to the
 	# filesystem block size) and gives some free space on the resulting
 	# image.
-	ROOT_MARGIN="$(echo "($ROOT_SIZE * 0.2 + 200 * 1024 * 1024) / 1" | bc)"
+	ROOT_MARGIN="$(echo "($ROOT_SIZE * 0.2 + 500 * 1024 * 1024) / 1" | bc)"
 
 	BOOT_PART_START=$((ALIGN))
 	BOOT_PART_SIZE=$(((BOOT_SIZE + ALIGN - 1) / ALIGN * ALIGN))
@@ -65,4 +65,17 @@ if [ "${NO_PRERUN_QCOW2}" = "0" ]; then
 
 	rsync -aHAXx --exclude /var/cache/apt/archives --exclude /boot "${EXPORT_ROOTFS_DIR}/" "${ROOTFS_DIR}/"
 	rsync -rtx "${EXPORT_ROOTFS_DIR}/boot/" "${ROOTFS_DIR}/boot/"
+fi
+
+on_chroot << EOF
+apt-get -y purge raspberrypi-kernel raspberrypi-bootloader
+apt-get -y autoremove
+apt-get clean
+EOF
+
+if [ -n "$BSP_PATH" ]; then
+	echo "Installing bpi bsp files..."
+	rsync -rtx "${BSP_PATH}/boot/" "${ROOTFS_DIR}/boot/"
+	rsync -aHAXx "${BSP_PATH}/root/" "${ROOTFS_DIR}/"
+	dd if=${BSP_PATH}/u-boot/u-boot.bin of=${LOOP_DEV} conv=fsync,notrunc bs=512 seek=1
 fi

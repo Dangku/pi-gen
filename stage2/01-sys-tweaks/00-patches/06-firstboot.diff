@@ -1,0 +1,27 @@
+Index: jessie-stage2/rootfs/usr/lib/raspberrypi-sys-mods/firstboot
+===================================================================
+--- jessie-stage2.orig/rootfs/usr/lib/raspberrypi-sys-mods/firstboot
++++ jessie-stage2/rootfs/usr/lib/raspberrypi-sys-mods/firstboot
+@@ -73,7 +73,7 @@ w
+ EOF
+   if [ "$?" -eq 0 ]; then
+     sed -i "s/${OLD_DISKID}/${DISKID}/g" /etc/fstab
+-    sed -i "s/${OLD_DISKID}/${DISKID}/" /boot/cmdline.txt
++    sed -i "s/${OLD_DISKID}/${DISKID}/" /boot/env.txt
+     sync
+   fi
+ 
+@@ -237,12 +237,8 @@ mkdir -p /run/systemd
+ mount /boot
+ mount / -o remount,ro
+ 
+-sed -i 's| init=/usr/lib/raspberrypi-sys-mods/firstboot||' /boot/cmdline.txt
+-sed -i 's| sdhci\.debug_quirks2=4||' /boot/cmdline.txt
++sed -i 's| init=/usr/lib/raspberrypi-sys-mods/firstboot||' /boot/env.txt
+ 
+-if ! grep -q splash /boot/cmdline.txt; then
+-  sed -i "s/ quiet//g" /boot/cmdline.txt
+-fi
+ mount /boot -o remount,ro
+ sync
+ 
