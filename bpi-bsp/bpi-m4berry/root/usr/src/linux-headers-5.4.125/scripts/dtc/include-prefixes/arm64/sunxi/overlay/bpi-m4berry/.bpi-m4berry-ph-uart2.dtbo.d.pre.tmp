@@ -1,0 +1,2 @@
+bpi-m4berry-ph-uart2.o: \
+ arch/arm64/boot/dts/sunxi/overlay/bpi-m4berry/bpi-m4berry-ph-uart2.dts

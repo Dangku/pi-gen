@@ -21,7 +21,8 @@ if [ "${NO_PRERUN_QCOW2}" = "0" ]; then
 	# image.
 	ROOT_MARGIN="$(echo "($ROOT_SIZE * 0.2 + 500 * 1024 * 1024) / 1" | bc)"
 
-	BOOT_PART_START=$((ALIGN))
+	# bpi, reserve 100M
+	BOOT_PART_START="$((100 * 1024 * 1024))"
 	BOOT_PART_SIZE=$(((BOOT_SIZE + ALIGN - 1) / ALIGN * ALIGN))
 	ROOT_PART_START=$((BOOT_PART_START + BOOT_PART_SIZE))
 	ROOT_PART_SIZE=$(((ROOT_SIZE + ROOT_MARGIN + ALIGN  - 1) / ALIGN * ALIGN))
@@ -77,5 +78,10 @@ if [ -n "$BSP_PATH" ]; then
 	echo "Installing bpi bsp files..."
 	rsync -rtx "${BSP_PATH}/boot/" "${ROOTFS_DIR}/boot/"
 	rsync -aHAXx "${BSP_PATH}/root/" "${ROOTFS_DIR}/"
-	dd if=${BSP_PATH}/u-boot/u-boot.bin of=${LOOP_DEV} conv=fsync,notrunc bs=512 seek=1
+
+	if [[ "$BOARD" == "bpi-m5" ]] || [[ "$BOARD" == "bpi-cm4io" ]]; then
+		dd if=${BSP_PATH}/u-boot/u-boot.bin of=${LOOP_DEV} conv=fsync,notrunc bs=512 seek=1
+	elif [[ "$BOARD" == "bpi-m4berry" ]] || [[ "$BOARD" == "bpi-m4zero" ]]; then
+		dd if=${BSP_PATH}/u-boot/u-boot.bin of=${LOOP_DEV} conv=fsync,notrunc bs=1024 seek=8
+	fi
 fi

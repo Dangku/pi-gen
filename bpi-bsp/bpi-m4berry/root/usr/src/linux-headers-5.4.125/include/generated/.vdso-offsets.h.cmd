@@ -1,0 +1,1 @@
+cmd_include/generated/vdso-offsets.h := /media/dangku/mydata/m4berry/linux/BPI-M4B-bsp/toolchains/gcc-arm-11.2-2022.02-x86_64-aarch64-none-linux-gnu/bin/aarch64-none-linux-gnu-nm arch/arm64/kernel/vdso/vdso.so.dbg | ./arch/arm64/kernel/vdso/gen_vdso_offsets.sh | LC_ALL=C sort > include/generated/vdso-offsets.h

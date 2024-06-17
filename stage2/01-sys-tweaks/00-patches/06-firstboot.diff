@@ -10,7 +10,18 @@ Index: jessie-stage2/rootfs/usr/lib/raspberrypi-sys-mods/firstboot
 +    sed -i "s/${OLD_DISKID}/${DISKID}/" /boot/env.txt
      sync
    fi
+
+@@ -223,8 +223,8 @@ main () {
+     apply_custom "/boot/custom.toml"
+   fi
  
+-  whiptail --infobox "Fix PARTUUID..." 20 60
+-  fix_partuuid
++  #whiptail --infobox "Fix PARTUUID..." 20 60
++  #fix_partuuid
+ 
+   return 0
+ } 
 @@ -237,12 +237,8 @@ mkdir -p /run/systemd
  mount /boot
  mount / -o remount,ro

@@ -1,0 +1,24 @@
+# 0 "arch/arm64/boot/dts/sunxi/overlay/bpi-m4zero/bpi-m4zero-pwm2.dts"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "arch/arm64/boot/dts/sunxi/overlay/bpi-m4zero/bpi-m4zero-pwm2.dts"
+/dts-v1/;
+/plugin/;
+
+/ {
+ fragment@0 {
+  target = <&pwm>;
+
+  __overlay__ {
+   status = "okay";
+  };
+ };
+
+ fragment@1 {
+  target = <&pwm1>;
+
+  __overlay__ {
+   status = "okay";
+  };
+ };
+};
