@@ -1,0 +1,2 @@
+bpi-m4berry-i2c3.o: \
+ arch/arm64/boot/dts/sunxi/overlay/bpi-m4berry/bpi-m4berry-i2c3.dts

@@ -1,0 +1,19 @@
+# 0 "arch/arm64/boot/dts/sunxi/overlay/bpi-m4berry/bpi-m4berry-ph-uart2.dts"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "arch/arm64/boot/dts/sunxi/overlay/bpi-m4berry/bpi-m4berry-ph-uart2.dts"
+/dts-v1/;
+/plugin/;
+
+/ {
+ fragment@0 {
+  target = <&uart2>;
+
+  __overlay__ {
+   status = "okay";
+   pinctrl-names = "default", "sleep";
+   pinctrl-0 = <&uart2_ph_pin>;
+   pinctrl-1 = <&uart2_ph_sleep>;
+  };
+ };
+};

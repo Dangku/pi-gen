@@ -1,0 +1,2 @@
+# Soft dependencies extracted from modules themselves.
+softdep act_mpls post: mpls_gso

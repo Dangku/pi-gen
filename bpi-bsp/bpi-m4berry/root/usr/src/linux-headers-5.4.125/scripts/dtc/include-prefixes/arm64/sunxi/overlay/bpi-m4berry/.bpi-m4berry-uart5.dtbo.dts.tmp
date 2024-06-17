@@ -1,0 +1,16 @@
+# 0 "arch/arm64/boot/dts/sunxi/overlay/bpi-m4berry/bpi-m4berry-uart5.dts"
+# 0 "<built-in>"
+# 0 "<command-line>"
+# 1 "arch/arm64/boot/dts/sunxi/overlay/bpi-m4berry/bpi-m4berry-uart5.dts"
+/dts-v1/;
+/plugin/;
+
+/ {
+ fragment@0 {
+  target = <&uart5>;
+
+  __overlay__ {
+   status = "okay";
+  };
+ };
+};
